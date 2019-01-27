@@ -3,7 +3,7 @@ class LessonsController < ApplicationController
   before_action :require_authorized_for_current_lesson, only: [:show]
   
   def show 
-    @lesson = current_lesson.section.course
+    @lesson = current_lesson.section.course.find(params[:lesson_id])
   end
   
   private
@@ -17,7 +17,7 @@ class LessonsController < ApplicationController
  
   helper_method :current_lesson
     def current_lesson
-      @current_lesson ||=Lesson.find(params[:lesson_id])
+      @current_lesson ||= Lesson.find(params[:lesson_id])
     end
   end
 
