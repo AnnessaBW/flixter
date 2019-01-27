@@ -1,7 +1,7 @@
 class Instructor::LessonsController < ApplicationController
   before_action :authenticate_user!
   before_action :require_authorized_for_current_section, only: [:new, :create]
-  bfore_action :require_authorized_for_current_lesson, only: [:update]
+  before_action :require_authorized_for_current_lesson, only: [:update]
 
   def new
      @lesson = Lesson.new
@@ -22,6 +22,8 @@ private
 def require_authorized_for_current_lesson
   if current_lesson.section.course.user != current_user
     render plain: 'Unauthorized'
+  end
+end
 
   def current_lesson 
     current_lesson ||= Lesson.find(params[:id])
@@ -43,3 +45,4 @@ def require_authorized_for_current_lesson
     params.require(:lesson).permit(:title, :subtitle, :video, :row_order_position)
   end
 end
+
