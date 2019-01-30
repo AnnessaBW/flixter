@@ -21,6 +21,7 @@ class Instructor::CoursesController < ApplicationController
     @section = Section.new
     @course = Course.find(params[:id])
     @image = Image.new
+    @lesson = Lesson.new
   end
 
   private
